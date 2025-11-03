@@ -59,6 +59,9 @@ elif args.model == 'QRes':
 elif args.model == 'PINNsFormer' or args.model == 'PINNsFormer_Enc_Only':
     model = get_model(args).Model(in_dim=2, hidden_dim=32, out_dim=1, num_layer=1).to(device)
     model.apply(init_weights)
+elif args.model == 'SetPINN':
+    model = get_model(args).Model(in_dim=2, hidden_dim=32, out_dim=1, num_layer=3).to(device)
+    model.apply(init_weights)
 else:
     model = get_model(args).Model(in_dim=2, hidden_dim=512, out_dim=1, num_layer=4).to(device)
     model.apply(init_weights)
@@ -70,7 +73,7 @@ print(get_n_params(model))
 
 loss_track = []
 
-for i in tqdm(range(1000)):
+for i in tqdm(range(500)):
     def closure():
         pred_res = model(x_res, t_res)
         pred_left = model(x_left, t_left)

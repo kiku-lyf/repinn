@@ -1,4 +1,4 @@
-from models import PINN, QRes, FLS, KAN, PINNsFormer, PINNsFormer_Enc_Only
+from models import PINN, QRes, FLS, KAN, PINNsFormer, PINNsFormer_Enc_Only,SetPINN
 
 
 def get_model(args):
@@ -9,5 +9,6 @@ def get_model(args):
         'KAN': KAN,
         'PINNsFormer': PINNsFormer,
         'PINNsFormer_Enc_Only': PINNsFormer_Enc_Only, # more efficient and with better performance than original PINNsFormer
+        'SetPINN': SetPINN,
     }
     return model_dict[args.model]

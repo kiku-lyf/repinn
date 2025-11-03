@@ -56,6 +56,9 @@ if args.model == 'KAN':
 elif args.model == 'QRes':
     model = get_model(args).Model(in_dim=2, hidden_dim=256, out_dim=1, num_layer=4).to(device)
     model.apply(init_weights)
+elif args.model == 'SetPINN':
+    model = get_model(args).Model(in_dim=2, hidden_dim=32, out_dim=1, num_layer=3).to(device)
+    model.apply(init_weights)
 elif args.model == 'PINNsFormer' or args.model == 'PINNsFormer_Enc_Only':
     model = get_model(args).Model(in_dim=2, hidden_dim=32, out_dim=1, num_layer=1).to(device)
     model.apply(init_weights)

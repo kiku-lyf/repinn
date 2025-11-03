@@ -35,8 +35,26 @@ device = args.device
 
 
 # 采样训练与测试网格
-res, b_left, b_right, b_upper, b_lower = get_data([-1.0, 1.0], [0.0, 1.0], 101, 101)
+res, b_left, b_right, b_upper, b_lower = get_data([-1.0, 1.0], [0.0, 1.0], 51, 51)
 res_test, _, _, _, _ = get_data([-1.0, 1.0], [0.0, 1.0], 101, 101)
+
+# res = torch.tensor(res, dtype=torch.float32, requires_grad=True).to(device)
+# b_left = torch.tensor(b_left, dtype=torch.float32, requires_grad=True).to(device)
+# b_right = torch.tensor(b_right, dtype=torch.float32, requires_grad=True).to(device)
+# b_upper = torch.tensor(b_upper, dtype=torch.float32, requires_grad=True).to(device)
+# b_lower = torch.tensor(b_lower, dtype=torch.float32, requires_grad=True).to(device)
+#
+# x_res, t_res = res[:, ..., 0:1], res[:, ..., 1:2]
+# x_left, t_left = b_left[:, ..., 0:1], b_left[:, ..., 1:2]
+# x_right, t_right = b_right[:, ..., 0:1], b_right[:, ..., 1:2]
+# x_upper, t_upper = b_upper[:, ..., 0:1], b_upper[:, ..., 1:2]
+# x_lower, t_lower = b_lower[:, ..., 0:1], b_lower[:, ..., 1:2]
+if args.model == 'PINNsFormer' or args.model == 'PINNsFormer_Enc_Only':
+    res = make_time_sequence(res, num_step=3, step=1e-4)
+    b_left = make_time_sequence(b_left, num_step=3, step=1e-4)
+    b_right = make_time_sequence(b_right, num_step=3, step=1e-4)
+    b_upper = make_time_sequence(b_upper, num_step=3, step=1e-4)
+    b_lower = make_time_sequence(b_lower, num_step=3, step=1e-4)
 
 res = torch.tensor(res, dtype=torch.float32, requires_grad=True).to(device)
 b_left = torch.tensor(b_left, dtype=torch.float32, requires_grad=True).to(device)

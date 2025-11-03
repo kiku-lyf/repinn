@@ -24,7 +24,7 @@ parser.add_argument('--past_iterations', type=int, default=5)
 args = parser.parse_args()
 device = args.device
 
-res, b_left, b_right, b_upper, b_lower = get_data([0, 2 * np.pi], [0, 1], 101, 101)
+res, b_left, b_right, b_upper, b_lower = get_data([0, 2 * np.pi], [0, 1], 51, 51)
 res_test, _, _, _, _ = get_data([0, 2 * np.pi], [0, 1], 101, 101)
 
 if args.model == 'PINNsFormer' or args.model == 'PINNsFormer_Enc_Only':
@@ -61,6 +61,9 @@ elif args.model == 'QRes':
     model.apply(init_weights)
 elif args.model == 'PINNsFormer' or args.model == 'PINNsFormer_Enc_Only':
     model = get_model(args).Model(in_dim=2, hidden_dim=32, out_dim=1, num_layer=1).to(device)
+    model.apply(init_weights)
+elif args.model == 'SetPINN':
+    model = get_model(args).Model(in_dim=2, hidden_dim=32, out_dim=1, num_layer=3).to(device)
     model.apply(init_weights)
 else:
     model = get_model(args).Model(in_dim=2, hidden_dim=512, out_dim=1, num_layer=4).to(device)
