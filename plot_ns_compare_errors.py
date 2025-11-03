@@ -301,7 +301,7 @@ import torch
 import matplotlib.pyplot as plt
 import scipy.io
 
-from models1 import QRes, KAN, FLS, PINN, PINNsFormer
+from models1 import QRes, KAN, FLS, PINN, PINNsFormer,PINNsFormer_Enc_Only
 
 
 def make_time_sequence(src, num_step=5, step=1e-4):
@@ -335,7 +335,11 @@ def predict_ns_model(model_name, model_path, x_test, y_test, t_test, device='cpu
                           noise_scale_base=0.25, device=device).to(device)
 
     elif model_name == 'PINNsFormer':
-        model = PINNsFormer.Model(d_out=2, d_hidden=512, d_model=32, N=1, heads=2).to(device)
+          # 到底是64还是512
+        model = PINNsFormer.Model(d_out=2, d_hidden=64, d_model=32, N=1, heads=2).to(device)
+
+    elif model_name == 'PINNsFormer_Enc_Only':
+        model = PINNsFormer_Enc_Only.Model(d_out=2, d_hidden=512, d_model=32, N=1, heads=2).to(device)
 
     else:
         raise ValueError(f"未知模型: {model_name}")
@@ -345,7 +349,7 @@ def predict_ns_model(model_name, model_path, x_test, y_test, t_test, device='cpu
     model.eval()
 
     # 准备输入数据
-    if model_name == 'PINNsFormer':
+    if model_name == 'PINNsFormer' or model_name == 'PINNsFormer_Enc_Only':
         # PINNsFormer 需要特殊的时间序列格式
         x_np = x_test.reshape(-1, 1)
         y_np = y_test.reshape(-1, 1)

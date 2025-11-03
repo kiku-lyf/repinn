@@ -427,9 +427,11 @@ if args.model == 'PINNsFormer' or args.model == 'PINNsFormer_Enc_Only':
     y_train = np.expand_dims(np.tile(y_train[:], (5)), -1)
     t_train = make_time_sequence(t_train, num_step=5, step=1e-2)
 
+
 x_train = torch.tensor(x_train, dtype=torch.float32, requires_grad=True).to(device)
 y_train = torch.tensor(y_train, dtype=torch.float32, requires_grad=True).to(device)
 t_train = torch.tensor(t_train, dtype=torch.float32, requires_grad=True).to(device)
+
 u_train = torch.tensor(u_train, dtype=torch.float32, requires_grad=True).to(device)
 v_train = torch.tensor(v_train, dtype=torch.float32, requires_grad=True).to(device)
 
