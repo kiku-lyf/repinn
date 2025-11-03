@@ -21,7 +21,6 @@ torch.manual_seed(seed)
 torch.cuda.manual_seed(seed)
 
 
-device = 'cuda:0'
 
 
 def get_perturbation(range, size, type='uniform'):
@@ -70,7 +69,7 @@ class WaveAct(nn.Module):
 class Differential_perturbation(nn.Module):
     def __init__(self, range, size):
         super(Differential_perturbation, self).__init__()
-        self.perturbation = get_perturbation(range=range, size=size).to(device)
+        self.perturbation = get_perturbation(range=range, size=size)
 
     def forward(self, src):
         num_pert = self.perturbation.size(0)
