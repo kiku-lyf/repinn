@@ -185,7 +185,8 @@ def main():
             if model_name == 'KAN':
                 model = model_module.Model(width=[2, 5, 5, 1], grid=5, k=3, grid_eps=1.0, noise_scale_base=0.25, device=args.device).to(args.device)
             elif model_name == 'SetPINN':
-                model = model_module.Model(in_dim=2, hidden_dim=32, out_dim=1, num_layer=3).to(args.device)
+                # model = model_module.Model(in_dim=2, hidden_dim=32, out_dim=1, num_layer=3).to(args.device)
+                model = model.kdv.Model(in_dim=2, hidden_dim=32, out_dim=1, num_layer=1).to(args.device)
             elif model_name == 'QRes':
                 model = model_module.Model(in_dim=2, hidden_dim=256, out_dim=1, num_layer=4).to(args.device)
             elif model_name == 'PINNsFormer' or model_name == 'PINNsFormer_Enc_Only':

@@ -239,6 +239,33 @@ for epoch in tqdm(range(args.epochs)):
             p_y = torch.autograd.grad(p, y_train, grad_outputs=torch.ones_like(p),
                                       retain_graph=True, create_graph=True)[0]
 
+            # u_t = \
+            # torch.autograd.grad(u, t_train, grad_outputs=torch.ones_like(u), retain_graph=True, create_graph=True)[0]
+            # u_x = \
+            # torch.autograd.grad(u, x_train, grad_outputs=torch.ones_like(u), retain_graph=True, create_graph=True)[0]
+            # u_y = \
+            # torch.autograd.grad(u, y_train, grad_outputs=torch.ones_like(u), retain_graph=True, create_graph=True)[0]
+            # u_xx = \
+            # torch.autograd.grad(u, x_train, grad_outputs=torch.ones_like(u_x), retain_graph=True, create_graph=True)[0]
+            # u_yy = \
+            # torch.autograd.grad(u, y_train, grad_outputs=torch.ones_like(u_y), retain_graph=True, create_graph=True)[0]
+            #
+            # v_t = \
+            # torch.autograd.grad(v, t_train, grad_outputs=torch.ones_like(v), retain_graph=True, create_graph=True)[0]
+            # v_x = \
+            # torch.autograd.grad(v, x_train, grad_outputs=torch.ones_like(v), retain_graph=True, create_graph=True)[0]
+            # v_y = \
+            # torch.autograd.grad(v, y_train, grad_outputs=torch.ones_like(v), retain_graph=True, create_graph=True)[0]
+            # v_xx = \
+            # torch.autograd.grad(v, x_train, grad_outputs=torch.ones_like(v_x), retain_graph=True, create_graph=True)[0]
+            # v_yy = \
+            # torch.autograd.grad(v, y_train, grad_outputs=torch.ones_like(v_y), retain_graph=True, create_graph=True)[0]
+            #
+            # p_x = \
+            # torch.autograd.grad(p, x_train, grad_outputs=torch.ones_like(p), retain_graph=True, create_graph=True)[0]
+            # p_y = \
+            # torch.autograd.grad(p, y_train, grad_outputs=torch.ones_like(p), retain_graph=True, create_graph=True)[0]
+
             f_u = u_t + (u * u_x + v * u_y) + p_x - nu * (u_xx + u_yy)
             f_v = v_t + (u * v_x + v * v_y) + p_y - nu * (v_xx + v_yy)
 

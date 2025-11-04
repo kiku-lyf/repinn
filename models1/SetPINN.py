@@ -69,7 +69,7 @@ class WaveAct(nn.Module):
 class Differential_perturbation(nn.Module):
     def __init__(self, range, size):
         super(Differential_perturbation, self).__init__()
-        self.perturbation = get_perturbation(range=range, size=size)
+        self.perturbation = get_perturbation(range=range, size=size).to('cuda')
 
     def forward(self, src):
         num_pert = self.perturbation.size(0)
@@ -127,5 +127,3 @@ def init_weights(m):
     if isinstance(m, nn.Linear):
         nn.init.xavier_uniform_(m.weight)  # Fixed deprecation
         m.bias.data.fill_(0.01)
-
-
